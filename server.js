@@ -6,6 +6,9 @@ require('dotenv').config()
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// MODELS
+const db = require("./models");
+
 // PARSE BODY AS JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,6 +25,8 @@ const routes = require("./controllers/controllers.js");
 app.use(routes);
 
 // START SERVER
-app.listen(PORT, () => {
-  console.log('Server listening on: ' + PORT);
+db.sequelize.sync({ force: true }).then(function () {
+  app.listen(PORT, () => {
+    console.log('Server listening on: ' + PORT);
+  });
 });
