@@ -3,11 +3,14 @@ $(function () {
   // UPDATE EATEN STATUS ON CLICK
   $(".update-eaten").on("click", function (e) {
     let id = $(this).data("id");
-    let eaten = $(this).data("eaten_update");
+ 
 
     let update = {
-      eaten: eaten
+      eaten: true
     };
+
+    console.log(update);
+
 
     $.ajax("/api/burgers/" + id, {
       type: "PUT",
@@ -20,13 +23,34 @@ $(function () {
     );
   });
 
-  // ADD ITEM ON FORM SUBMIT
-  $(".add-form").on("submit", function (e) {
+  // ADD RESTAURANT ON FORM SUBMIT
+  $(".add-form_restaurant").on("submit", function (e) {
+    e.preventDefault();
+
+    let newRest = {
+      restaurant_name: $("#rest_name").val().trim()
+    };
+
+    $.ajax("/api/restaurant", {
+      type: "POST",
+      data: newRest
+    }).then(
+      function () {
+        console.log("added " + newRest);
+        location.reload()
+      }
+    );
+  });
+
+  // ADD BURGER ON FORM SUBMIT
+  $(".add-form_burger").on("submit", function (e) {
     e.preventDefault();
 
     let newBurger = {
-      name: $("#name").val().trim()
+      burger_name: $("#burger_name").val().trim(),
+      RestaurantId: $("#restaurant_id").val()
     };
+    console.log(newBurger);
 
     $.ajax("/api/burgers", {
       type: "POST",
@@ -34,7 +58,7 @@ $(function () {
     }).then(
       function () {
         console.log("added " + newBurger);
-        location.reload()
+        location.reload();
       }
     );
   });

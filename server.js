@@ -20,12 +20,11 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars")
 
-// GIVE ACCESS TO THE CONTROLLER
-const routes = require("./controllers/controllers.js");
-app.use(routes);
+// ROUTES
+require("./routes/api-routes.js")(app);
 
 // START SERVER
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, () => {
     console.log('Server listening on: ' + PORT);
   });

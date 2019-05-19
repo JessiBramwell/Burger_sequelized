@@ -1,14 +1,24 @@
 <div class="col-12">
 
-  <form class="add-form form-inline">
+  <form class="add-form_restaurant form-inline">
     <div class="form-group mb-2">
-      <input class="form-control" type="text" name="add" id="name" placeholder="Burger Name">
+      <input class="form-control" type="text" name="rest_name" id="rest_name" placeholder="Restaurant Name">
+      <button class="btn btn-primary ml-3" type="submit">Add New</button>
+    </div>
+  </form>
+  <br>
+
+  <form class="add-form_burger form-inline">
+    <div class="form-group mb-2">
+      <input class="form-control" type="text" name="burger_name" id="burger_name" placeholder="Burger Name">
+
+      {{> options-block}}
+
       <button class="btn btn-primary ml-3" type="submit">Add</button>
     </div>
   </form>
   <br>
 </div>
-
 
 <div class="col-6">
   <h2>To Eat</h2>
@@ -17,7 +27,19 @@
   <ul class="list-group list-group-flush">
     {{#each burgers}}
     {{#unless eaten}}
-    {{> burger-block eat=true}}
+    <li class="list-group-item">
+
+      <button class="update-eaten btn btn-primary btn-sm mr-3" data-id="{{id}}" data-eaten_update="true">Eat
+        It</button>
+
+      {{burger_name}} | {{Restaurant.restaurant_name}}
+
+      <button type="button" class="close delete-item" data-id="{{id}}" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </li>
+
     {{/unless}}
     {{/each}}
   </ul>
@@ -30,7 +52,15 @@
   <ul class="list-group list-group-flush">
     {{#each burgers}}
     {{#if eaten}}
-    {{> burger-block eat=false}}
+    <li class="list-group-item">
+
+      {{burger_name}} | {{Restaurant.restaurant_name}}
+
+      <button type="button" class="close delete-item" data-id="{{id}}" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </li>
     {{/if}}
     {{/each}}
   </ul>
