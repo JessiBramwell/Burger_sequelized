@@ -9,8 +9,6 @@ $(function () {
       eaten: true
     };
 
-    console.log(update);
-
 
     $.ajax("/api/burgers/" + id, {
       type: "PUT",

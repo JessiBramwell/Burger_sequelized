@@ -8,6 +8,7 @@ The functionality is quite basic. A burger can be entered and saved to the datab
 * Node.js
 * Express
 * Express Handlebars 
+* Sequelize
 
 ## Roadmap
 Later iterations of this project will store the name of the burger, the restaurant, and eaten burgers will be displayed with a rating. 

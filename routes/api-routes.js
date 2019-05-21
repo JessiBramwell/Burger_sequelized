@@ -46,20 +46,15 @@ module.exports = function (app) {
   });
 
   app.put("/api/burgers/:id", function (req, res) {
-    console.log(req.params.id, req.body);
 
     db.Burger.update({
-      eaten: req.body
+      eaten: true
     }, {
         where: {
           id: req.params.id
         }
       }).then(function (result) {
         res.json(result)
-
-
-      }).chatch(function (err) {
-        res.json(err)
 
       });
   });
